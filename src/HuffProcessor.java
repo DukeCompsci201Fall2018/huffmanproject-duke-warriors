@@ -196,7 +196,7 @@ public class HuffProcessor {
 				break;
 			}
 			
-			String code = encoding[in.readBits(BITS_PER_WORD)];
+			String code = encoding[val];
 			out.writeBits(code.length(), Integer.parseInt(code, 2));
 		}
 	}

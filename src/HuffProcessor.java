@@ -51,11 +51,6 @@ public class HuffProcessor {
 		
 		in.reset();
 		writeCompressedBits(codings, in, out);
-		/*		while (true){
-			int val = in.readBits(BITS_PER_WORD);
-			if (val == -1) break;
-			out.writeBits(BITS_PER_WORD, val);
-		}*/
 		out.close();
 	}
 	
@@ -136,6 +131,14 @@ public class HuffProcessor {
 		}
 		freq[PSEUDO_EOF] = 1;
 		
+		if (myDebugLevel >= DEBUG_HIGH) {
+			for (int i = 0; i < freq.length; i++) {
+				if (freq[i] != 0) {
+					System.out.println(i + "   " + freq[i]);
+				}
+			}
+		}
+		
 		return freq;
 	}
 	
@@ -146,6 +149,10 @@ public class HuffProcessor {
 			if (counts[i] > 0) {
 				pq.add(new HuffNode(i, counts[i], null, null));
 			}
+		}
+		
+		if (myDebugLevel >= DEBUG_HIGH) {
+			System.out.printf("pq created with %d nodes\n", pq.size());
 		}
 		
 		while (pq.size() > 1) {
@@ -168,6 +175,9 @@ public class HuffProcessor {
 	private void codingHelper(HuffNode root, String path, String[] encodings) {
 		if (root.myLeft == null && root.myRight == null) {
 			encodings[root.myValue] = path;
+			if (myDebugLevel >= DEBUG_HIGH) {
+				System.out.printf("encoding for %d is %s\n", root.myValue,path);
+			}
 			return;
 		}
 		

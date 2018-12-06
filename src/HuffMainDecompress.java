@@ -14,7 +14,7 @@ public class HuffMainDecompress {
 		}
 		BitInputStream bis = new BitInputStream(inf);
 		BitOutputStream bos = new BitOutputStream(outf);
-		HuffProcessor hp = new HuffProcessor();
+		HuffProcessor hp = new HuffProcessor(HuffProcessor.DEBUG_HIGH);
 		hp.decompress(bis, bos);
 		System.out.printf("uncompress from %s to %s\n", 
 				           inf.getName(),outf.getName());		

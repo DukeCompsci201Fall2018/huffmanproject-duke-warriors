@@ -175,9 +175,11 @@ public class HuffProcessor {
 	private void codingHelper(HuffNode root, String path, String[] encodings) {
 		if (root.myLeft == null && root.myRight == null) {
 			encodings[root.myValue] = path;
+			
 			if (myDebugLevel >= DEBUG_HIGH) {
-				System.out.printf("encoding for %d is %s\n", root.myValue,path);
+				System.out.printf("encoding for %d is %s\n", root.myValue, path);
 			}
+			
 			return;
 		}
 		
